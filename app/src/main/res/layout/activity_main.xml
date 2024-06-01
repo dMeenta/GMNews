@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--Header-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:background="@color/black">
+            <ImageButton
+                android:id="@+id/btnProfileImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/rounded"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:background="@color/black"
+                android:gravity="end">
+                <ImageButton
+                    android:id="@+id/btnSearch"
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:background="@color/black"
+                    app:srcCompat="@drawable/search" />
+                <ImageButton
+                    android:id="@+id/btnOptions"
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:background="@color/black"
+
+                    app:srcCompat="@drawable/menu" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--Categories-->
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:background="@color/black">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCategories"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+
+                android:background="@color/black"
+                tools:listitem="@layout/category_component"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        </LinearLayout>
+
+        <!--News-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNews"
+            android:layout_width="match_parent"
+            android:layout_height="513dp"
+            android:background="@color/black"
+            android:contextClickable="@layout/news_component"
+            tools:listitem="@layout/news_component" />
+
+        <!--Footer-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_gravity="bottom"
+            android:gravity="bottom">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/black"
+                android:orientation="horizontal">
+                <ImageButton
+                    android:id="@+id/btnCalendar"
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/transparent"
+                    app:srcCompat="@drawable/calendar" />
+
+                <ImageButton
+                    android:id="@+id/btnNews"
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    app:srcCompat="@drawable/news"/>
+
+                <ImageButton
+                    android:id="@+id/btnHome"
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    app:srcCompat="@drawable/home" />
+
+                <ImageButton
+                    android:id="@+id/btnMessages"
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    app:srcCompat="@drawable/chats"/>
+
+                <ImageButton
+                    android:id="@+id/btnProfile"
+                    android:layout_width="40dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/transparent"
+                    app:srcCompat="@drawable/profile"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
