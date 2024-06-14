@@ -65,6 +65,8 @@
         </LinearLayout>
 
         <!--News-->
+
+        <!--Footer-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNews"
             android:layout_width="match_parent"
@@ -73,7 +75,6 @@
             android:contextClickable="@layout/news_component"
             tools:listitem="@layout/news_component" />
 
-        <!--Footer-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

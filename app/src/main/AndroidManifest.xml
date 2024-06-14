@@ -15,15 +15,18 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Proyecto"
         tools:targetApi="31">
+        <!-- Ingresar activity como inicio -->
         <activity
-            android:name=".MainActivity"
+            android:name=".IngresarActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Puedes mantener MainActivity u otras actividades aquí -->
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
