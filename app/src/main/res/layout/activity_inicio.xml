@@ -7,4 +7,45 @@
     android:layout_height="match_parent"
     tools:context=".InicioActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/fondoinicio" />
+
+    <LinearLayout
+        android:layout_width="164dp"
+        android:layout_height="219dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="116dp"
+
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+
+        <Button
+            android:id="@+id/btnIngresar"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:layout_weight="1"
+            android:backgroundTint="#20328F"
+            android:text="Ingresar"
+
+            />
+
+        <Button
+            android:id="@+id/btnRegistrarse"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="66dp"
+            android:layout_weight="1"
+            android:backgroundTint="#7D838C"
+            android:text="Registrarse" />
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

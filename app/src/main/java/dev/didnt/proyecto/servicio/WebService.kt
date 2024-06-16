@@ -11,7 +11,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 object AppConstantes{
-    const val BASE_URL = "http://192.168.0.9:3000" //Añadir ip
+    const val BASE_URL = "http://192.168.56.1" //Añadir ip
 }
 
 interface WebService {
@@ -20,6 +20,10 @@ interface WebService {
 
     @POST("/login")
     suspend fun login(@Body usuario: Usuario): Response<Usuario>
+
+    @POST("/usuarios/registrar")
+    suspend fun registrarUsuario(@Body usuario: Usuario):Response<String>
+
 }
 
 object RetrofitClient{
