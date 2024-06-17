@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.RadioButton
 import androidx.activity.enableEdgeToEdge
@@ -28,9 +29,10 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var registroContra:EditText
     private lateinit var registroFecha: EditText
     private lateinit var btnRegistrar:Button
-
     private lateinit var btnF:RadioButton
     private lateinit var btnM:RadioButton
+    private val calendar = Calendar.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -40,7 +42,6 @@ class RegistroActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         asigarnarReferencias()
     }
 
@@ -64,33 +65,60 @@ class RegistroActivity : AppCompatActivity() {
                 mostrarMensaje("Debe completar los campos obligatorios.")
             }
         }
-
+        registroFecha.setOnClickListener{
+            showDatePicker()
+        }
     }
 
-    private fun validarCampos(): Boolean {
-        val nombre = registroNombre.text.toString().trim()
-        val correo = registroCorreo.text.toString().trim()
-        val contraseña = registroContra.text.toString().trim()
-        val fechaNacimiento = registroFecha.text.toString().trim()
+    private fun showDatePicker() {
+        // Create a DatePickerDialog
+        val datePickerDialog = DatePickerDialog(
+            this, {DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+                // Create a new Calendar instance to hold the selected date
+                val selectedDate = Calendar.getInstance()
+                // Set the selected date using the values received from the DatePicker dialog
+                selectedDate.set(year, monthOfYear, dayOfMonth)
+                // Create a SimpleDateFormat to format the date as "dd/MM/yyyy"
+                val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                // Format the selected date into a string
+                val formattedDate = dateFormat.format(selectedDate.time)
+                // Update the TextView to display the selected date with the "Selected Date: " prefix
+                registroFecha.setText(formattedDate)
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        // Show the DatePicker dialog
+        datePickerDialog.show()
+    }
 
-        return nombre.isNotEmpty() && correo.isNotEmpty() && contraseña.isNotEmpty() && fechaNacimiento.isNotEmpty()
+    private fun validarCampos():Boolean {
+        val nombre = registroNombre.text
+        val idOnline = registroUser.text
+        val correo = registroCorreo.text
+        val password = registroContra.text
+        val fechaNacimiento = registroFecha.text
+
+        return nombre.isNotEmpty() && correo.isNotEmpty() && password.isNotEmpty() && fechaNacimiento.isNotEmpty() && idOnline.isNotEmpty()
     }
 
     private fun agregar(){
-        val  nombre = registroNombre.text.toString()
-        val  email = registroCorreo.text.toString()
-        val  contraseña = registroContra.text.toString()
-        val id_online =registroUser.text.toString()
+        val nombre = registroNombre.text.toString()
+        val email = registroCorreo.text.toString()
+        val password = registroContra.text.toString()
+        val idOnline =registroUser.text.toString()
         val fechaNacimiento = registroFecha.text.toString()
         val edad =calcularEdad(fechaNacimiento)
         val genero = if (btnM.isChecked) "M" else if (btnF.isChecked) "F" else ""
-        val usuario = Usuario(1,nombre,email,contraseña,id_online,edad,genero)
+
+        val usuario = Usuario(1,nombre,email,password,idOnline,edad,genero)
 
         CoroutineScope(Dispatchers.IO).launch {
             val rpta = RetrofitClient.webService.registrarUsuario(usuario)
             runOnUiThread {
                 if(rpta.isSuccessful){
-                    mostrarMensaje(rpta.body().toString())
+                    mostrarMensajeS(rpta.body().toString())
                 }
             }
         }
@@ -99,7 +127,7 @@ class RegistroActivity : AppCompatActivity() {
 
 
     private fun calcularEdad(fechaNacimiento: String): Int {
-        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val nacimiento = sdf.parse(fechaNacimiento)
         val fechaNCal = Calendar.getInstance().apply { time = nacimiento }
         val hoy = Calendar.getInstance()
@@ -112,14 +140,22 @@ class RegistroActivity : AppCompatActivity() {
     }
 
 
+    private fun mostrarMensajeS(mensaje:String){
+        val ventana = AlertDialog.Builder(this)
+        ventana.setTitle("Información")
+        ventana.setMessage(mensaje)
+        ventana.setPositiveButton("Aceptar", DialogInterface.OnClickListener{dialog, which ->
+                val intent =Intent(this,InicioActivity::class.java)
+                startActivity(intent)
+            })
+        ventana.create().show()
+    }
+
     private fun mostrarMensaje(mensaje:String){
         val ventana = AlertDialog.Builder(this)
         ventana.setTitle("Información")
         ventana.setMessage(mensaje)
-        ventana.setPositiveButton("Aceptar",DialogInterface.OnClickListener{dialog, which ->
-            val intent =Intent(this,MainActivity::class.java)
-            startActivity(intent)
-        })
+        ventana.setPositiveButton("Aceptar", null)
         ventana.create().show()
     }
 
