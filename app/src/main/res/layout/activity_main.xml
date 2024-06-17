@@ -70,7 +70,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNews"
             android:layout_width="match_parent"
-            android:layout_height="513dp"
+            android:layout_height="505dp"
             android:background="@color/black"
             android:contextClickable="@layout/news_component"
             tools:listitem="@layout/news_component" />
