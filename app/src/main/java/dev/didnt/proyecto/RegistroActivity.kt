@@ -71,25 +71,25 @@ class RegistroActivity : AppCompatActivity() {
     }
 
     private fun showDatePicker() {
-        // Create a DatePickerDialog
+
         val datePickerDialog = DatePickerDialog(
             this, {DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
-                // Create a new Calendar instance to hold the selected date
+
                 val selectedDate = Calendar.getInstance()
-                // Set the selected date using the values received from the DatePicker dialog
+
                 selectedDate.set(year, monthOfYear, dayOfMonth)
-                // Create a SimpleDateFormat to format the date as "dd/MM/yyyy"
+
                 val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                // Format the selected date into a string
+
                 val formattedDate = dateFormat.format(selectedDate.time)
-                // Update the TextView to display the selected date with the "Selected Date: " prefix
+
                 registroFecha.setText(formattedDate)
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
-        // Show the DatePicker dialog
+
         datePickerDialog.show()
     }
 
@@ -145,7 +145,7 @@ class RegistroActivity : AppCompatActivity() {
         ventana.setTitle("Información")
         ventana.setMessage(mensaje)
         ventana.setPositiveButton("Aceptar", DialogInterface.OnClickListener{dialog, which ->
-                val intent =Intent(this,InicioActivity::class.java)
+                val intent =Intent(this,IngresarActivity::class.java)
                 startActivity(intent)
             })
         ventana.create().show()
