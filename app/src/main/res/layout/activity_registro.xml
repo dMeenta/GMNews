@@ -15,7 +15,7 @@
     <androidx.cardview.widget.CardView
 
         android:layout_width="match_parent"
-        android:layout_height="480dp"
+        android:layout_height="500dp"
         android:layout_margin="50dp"
         android:background="@drawable/borde"
         app:cardCornerRadius="30dp"
@@ -23,7 +23,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="480dp"
+            android:layout_height="500dp"
 
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
@@ -88,12 +88,17 @@
             <EditText
                 android:id="@+id/registroFecha"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/borde"
                 android:drawableLeft="@drawable/icon_date"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:focusable="false"
+                android:clickable="true"
+                android:maxLines="1"
+                android:hint="Fecha de nacimiento"
+                android:padding="8dp"/>
 
 
             <RadioGroup
@@ -118,12 +123,10 @@
             <Button
                 android:id="@+id/btnRegistrar"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/dark_gray"
-                android:cornerRadius="20dp"
                 android:text="Registrar"
-
                 android:textSize="18sp" />
 
 
