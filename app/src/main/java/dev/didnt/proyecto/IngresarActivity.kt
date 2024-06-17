@@ -21,6 +21,7 @@ class IngresarActivity : AppCompatActivity() {
     private lateinit var txtUsername:EditText
     private lateinit var txtPassword:EditText
     private lateinit var btnLogin:Button
+    private lateinit var btnRegister:Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +31,19 @@ class IngresarActivity : AppCompatActivity() {
         txtUsername = findViewById(R.id.txtLoginUsername)
         txtPassword = findViewById(R.id.txtLoginPassword)
         btnLogin = findViewById(R.id.btnLogin)
+        btnRegister = findViewById(R.id.btnRegister)
+
+        btnRegister.setOnClickListener {
+            val intent =Intent(this, RegistroActivity::class.java)
+            startActivity(intent)
+        }
 
         btnLogin.setOnClickListener {
             val idOnline = txtUsername.text.toString().trim()
-            val contraseña = txtPassword.text.toString().trim()
+            val password = txtPassword.text.toString().trim()
 
-            if (idOnline.isNotEmpty() && contraseña.isNotEmpty()) {
-                val usuario = Usuario(0, "", "", contraseña, idOnline, 0, "")
+            if (idOnline.isNotEmpty() && password.isNotEmpty()) {
+                val usuario = Usuario(0, "", "", password, idOnline, 0, "")
                 loginUsuario(usuario)
             } else {
                 Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
