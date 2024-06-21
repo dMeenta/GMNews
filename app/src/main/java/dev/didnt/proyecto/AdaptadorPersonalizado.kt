@@ -5,7 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.imageview.ShapeableImageView
 import dev.didnt.proyecto.entidad.Noticia
+import kotlin.random.Random
 
 class AdaptadorPersonalizado: RecyclerView.Adapter<AdaptadorPersonalizado.MiViewHolder>() {
 
@@ -19,7 +21,7 @@ class AdaptadorPersonalizado: RecyclerView.Adapter<AdaptadorPersonalizado.MiView
         private var newsTitle = view.findViewById<TextView>(R.id.newsTitle)
         private var newsContent = view.findViewById<TextView>(R.id.newsContent)
         private var newsGame = view.findViewById<TextView>(R.id.newsGame)
-
+        var imgView:ShapeableImageView = view.findViewById<ShapeableImageView>(R.id.imgNew)
         fun setValores(noticia: Noticia){
             newsTitle.text = noticia.title
             newsContent.text = noticia.content
@@ -34,6 +36,13 @@ class AdaptadorPersonalizado: RecyclerView.Adapter<AdaptadorPersonalizado.MiView
     override fun onBindViewHolder(holder: AdaptadorPersonalizado.MiViewHolder, position: Int) {
         val noticiaItem = listaNoticias[position]
         holder.setValores(noticiaItem)
+        val num = Random.nextInt(1, 5)
+        when(num){
+            1 -> holder.imgView.setImageResource(R.drawable.news_1)
+            2 -> holder.imgView.setImageResource(R.drawable.news_2)
+            3 -> holder.imgView.setImageResource(R.drawable.news_3)
+            4 -> holder.imgView.setImageResource(R.drawable.news_4)
+        }
     }
 
     override fun getItemCount(): Int {
