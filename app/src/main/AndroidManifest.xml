@@ -16,12 +16,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".UserProfile"
+            android:exported="false" />
+        <activity
             android:name=".ModificarActivity"
             android:exported="false" />
         <activity
             android:name=".RegistroActivity"
-            android:exported="false" />
-        <!-- Ingresar activity como inicio -->
+            android:exported="false" /> <!-- Ingresar activity como inicio -->
         <activity
             android:name=".IngresarActivity"
             android:exported="true">

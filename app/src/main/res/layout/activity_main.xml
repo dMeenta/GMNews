@@ -33,7 +33,6 @@
             android:layout_width="match_parent"
             android:layout_height="560dp"
             android:background="@color/black"
-            android:contextClickable="@layout/news_component"
             tools:listitem="@layout/news_component" />
 
         <!--Footer-->

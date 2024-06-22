@@ -40,11 +40,28 @@ class IngresarActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener {
             val idOnline = txtUsername.text.toString().trim()
-            val password = txtPassword.text.toString().trim()
+            val userPassword = txtPassword.text.toString().trim()
 
-            if (idOnline.isNotEmpty() && password.isNotEmpty()) {
-                val usuario = Usuario(0, "", "", password, idOnline, 0, "")
-                loginUsuario(usuario)
+            if (idOnline.isNotEmpty() && userPassword.isNotEmpty()) {
+                val user = Usuario(idOnline, userPassword, "", "", 0, "")
+                CoroutineScope(Dispatchers.IO).launch {
+                    val res = RetrofitClient.webService.login(user)
+                    runOnUiThread {
+                        if(res.isSuccessful){
+                            val usuario = res.body()
+                            if(usuario != null){
+                                val intent = Intent(this@IngresarActivity, MainActivity::class.java)
+                                intent.putExtra("idOnline", usuario.idOnline)
+                                intent.putExtra("userPassword", usuario.userPassword)
+                                intent.putExtra("nombre", usuario.nombre)
+                                intent.putExtra("email", usuario.email)
+                                intent.putExtra("edad", usuario.edad)
+                                intent.putExtra("genero", usuario.genero)
+                                startActivity(intent)
+                            }
+                        }
+                    }
+                }
             } else {
                 Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
             }
@@ -54,35 +71,6 @@ class IngresarActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-        }
-    }
-
-    private fun loginUsuario(usuario: Usuario) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val response = RetrofitClient.webService.login(usuario)
-
-                if (response.isSuccessful) {
-                    val usuarioResponse = response.body()
-                    if (usuarioResponse != null) {
-                        // Login exitoso, puedes guardar información de sesión si es necesario
-                        startActivity(Intent(this@IngresarActivity, MainActivity::class.java))
-                        finish()
-                    } else {
-                        runOnUiThread {
-                            Toast.makeText(this@IngresarActivity, "Respuesta del servidor vacía", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                } else {
-                    runOnUiThread {
-                        Toast.makeText(this@IngresarActivity, "Error en el inicio de sesión: ${response.code()}", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            } catch (e: Exception) {
-                runOnUiThread {
-                    Toast.makeText(this@IngresarActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
         }
     }
 }

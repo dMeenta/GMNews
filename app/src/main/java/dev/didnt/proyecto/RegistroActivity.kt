@@ -104,15 +104,15 @@ class RegistroActivity : AppCompatActivity() {
     }
 
     private fun agregar(){
+        val idOnline =registroUser.text.toString()
+        val password = registroContra.text.toString()
         val nombre = registroNombre.text.toString()
         val email = registroCorreo.text.toString()
-        val password = registroContra.text.toString()
-        val idOnline =registroUser.text.toString()
         val fechaNacimiento = registroFecha.text.toString()
         val edad =calcularEdad(fechaNacimiento)
         val genero = if (btnM.isChecked) "M" else if (btnF.isChecked) "F" else ""
 
-        val usuario = Usuario(1,nombre,email,password,idOnline,edad,genero)
+        val usuario = Usuario(idOnline,password,nombre,email,edad,genero)
 
         CoroutineScope(Dispatchers.IO).launch {
             val rpta = RetrofitClient.webService.registrarUsuario(usuario)

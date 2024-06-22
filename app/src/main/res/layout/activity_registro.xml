@@ -4,16 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondoinicio"
-    android:paddingTop="100dp"
+    android:gravity="center"
     tools:context=".RegistroActivity">
 
 
     <androidx.cardview.widget.CardView
-
+        android:alpha="0.7"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_margin="50dp"
@@ -22,20 +21,21 @@
         app:cardElevation="20dp">
 
         <LinearLayout
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="500dp"
-
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="24dp">
 
             <TextView
-                android:layout_width="267dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:text="Registrarse"
                 android:textAlignment="center"
                 android:textColor="@color/dark_gray"
-                android:textSize="30dp" />
+                android:textSize="25dp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/registroNombre"
@@ -110,12 +110,14 @@
                     android:id="@+id/btnM"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:text="Masculino" />
                 <RadioButton
                     android:id="@+id/btnF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:text="Femenino" />
             </RadioGroup>
@@ -123,12 +125,11 @@
             <Button
                 android:id="@+id/btnRegistrar"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:backgroundTint="@color/dark_gray"
                 android:text="Registrar"
-                android:textSize="18sp" />
-
+                android:textSize="18sp"
+                />
 
         </LinearLayout>
 
