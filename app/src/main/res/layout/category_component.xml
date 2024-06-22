@@ -13,7 +13,7 @@
         android:layout_height="70dp"
         android:scaleType="fitXY"
         app:shapeAppearanceOverlay="@style/category_radius"
-        android:background="@color/white" />
+        android:background="@color/black" />
 
     <TextView
         android:id="@+id/lblCategory"
