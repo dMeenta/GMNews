@@ -1,6 +1,5 @@
 package dev.didnt.proyecto
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -9,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dev.didnt.proyecto.entidad.Juego
 import dev.didnt.proyecto.entidad.Noticia
 import dev.didnt.proyecto.servicio.RetrofitClient
 import kotlinx.coroutines.CoroutineScope
@@ -17,8 +17,11 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var rvNoticias: RecyclerView
-    private var adaptador:AdaptadorPersonalizado = AdaptadorPersonalizado()
+    private lateinit var rvCategorias: RecyclerView
+    private var adaptadorNoticias:AdaptadorPersonalizadoNoticias = AdaptadorPersonalizadoNoticias()
+    private var adaptadorCategorias:AdaptadorPersonalizadoJuegos = AdaptadorPersonalizadoJuegos()
     private var listaNoticia:ArrayList<Noticia> = ArrayList()
+    private var listaJuegos:ArrayList<Juego> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -34,10 +37,13 @@ class MainActivity : AppCompatActivity() {
     private fun cargarDatos(){
         CoroutineScope(Dispatchers.IO).launch {
             val rpta = RetrofitClient.webService.obtenerNoticias()
+            val rpta2 = RetrofitClient.webService.obtenerJuegos()
             runOnUiThread {
                 if(rpta.isSuccessful){
                     listaNoticia = rpta.body()!!.listaNoticias
-                    adaptador.agregarDatos(listaNoticia)
+                    listaJuegos = rpta2.body()!!.listaJuegos
+                    adaptadorNoticias.agregarDatosNoticias(listaNoticia)
+                    adaptadorCategorias.agregarDatosCategorias(listaJuegos)
                     mostrarDatos();
                 }else{
                     Log.d("===", "Error en servicio")
@@ -47,11 +53,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun mostrarDatos(){
-        rvNoticias.adapter = adaptador
+        rvNoticias.adapter = adaptadorNoticias
+        rvCategorias.adapter = adaptadorCategorias
     }
 
     private fun asignarRefencias(){
         rvNoticias = findViewById(R.id.rvNews)
         rvNoticias.layoutManager = LinearLayoutManager(this)
+        rvCategorias = findViewById(R.id.rvCategories)
+        rvCategorias.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
     }
 }
