@@ -19,13 +19,12 @@
         android:orientation="vertical"
         android:background="@color/black">
             <androidx.recyclerview.widget.RecyclerView
+                android:scrollbarSize="0dp"
                 android:id="@+id/rvCategories"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:background="@color/black"
-                tools:listitem="@layout/category_component"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                android:scrollbars="horizontal"
+                tools:listitem="@layout/category_component" />
         </LinearLayout>
 
         <!--News-->
