@@ -18,6 +18,9 @@ interface WebService {
     @GET("/news")
     suspend fun obtenerNoticias(): Response<NoticiaResponse>
 
+    @GET("/games")
+    suspend fun obtenerJuegos(): Response<JuegoResponse>
+
     @POST("/login")
     suspend fun login(@Body usuario: Usuario): Response<Usuario>
 
