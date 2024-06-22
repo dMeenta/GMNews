@@ -9,11 +9,11 @@ import com.google.android.material.imageview.ShapeableImageView
 import dev.didnt.proyecto.entidad.Noticia
 import kotlin.random.Random
 
-class AdaptadorPersonalizado: RecyclerView.Adapter<AdaptadorPersonalizado.MiViewHolder>() {
+class AdaptadorPersonalizadoNoticias: RecyclerView.Adapter<AdaptadorPersonalizadoNoticias.MiViewHolder>() {
 
     private var listaNoticias:ArrayList<Noticia> = ArrayList()
 
-    fun agregarDatos(items: ArrayList<Noticia>){
+    fun agregarDatosNoticias(items: ArrayList<Noticia>){
         this.listaNoticias = items
     }
 
@@ -22,7 +22,7 @@ class AdaptadorPersonalizado: RecyclerView.Adapter<AdaptadorPersonalizado.MiView
         private var newsContent = view.findViewById<TextView>(R.id.newsContent)
         private var newsGame = view.findViewById<TextView>(R.id.newsGame)
         var imgView:ShapeableImageView = view.findViewById<ShapeableImageView>(R.id.imgNew)
-        fun setValores(noticia: Noticia){
+        fun setValoresNoticia(noticia: Noticia){
             newsTitle.text = noticia.title
             newsContent.text = noticia.content
             newsGame.text = noticia.game
@@ -33,9 +33,9 @@ class AdaptadorPersonalizado: RecyclerView.Adapter<AdaptadorPersonalizado.MiView
         LayoutInflater.from(parent.context).inflate(R.layout.news_component,parent,false)
     )
 
-    override fun onBindViewHolder(holder: AdaptadorPersonalizado.MiViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AdaptadorPersonalizadoNoticias.MiViewHolder, position: Int) {
         val noticiaItem = listaNoticias[position]
-        holder.setValores(noticiaItem)
+        holder.setValoresNoticia(noticiaItem)
         val num = Random.nextInt(1, 5)
         when(num){
             1 -> holder.imgView.setImageResource(R.drawable.news_1)
