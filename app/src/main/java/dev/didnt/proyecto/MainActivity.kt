@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         var userEmail = intent.getStringExtra("email")
         var userEdad = intent.getIntExtra("edad", 0)
         var userGenero = intent.getStringExtra("genero")
-
         rvNoticias = findViewById(R.id.rvNews)
         rvNoticias.layoutManager = LinearLayoutManager(this)
         rvCategorias = findViewById(R.id.rvCategories)
@@ -60,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("userEmail", userEmail)
             intent.putExtra("userEdad", userEdad)
             intent.putExtra("userGenero", userGenero)
+            finish()
             startActivity(intent)
         }
     }

@@ -145,9 +145,10 @@ class RegistroActivity : AppCompatActivity() {
         ventana.setTitle("Información")
         ventana.setMessage(mensaje)
         ventana.setPositiveButton("Aceptar", DialogInterface.OnClickListener{dialog, which ->
-                val intent =Intent(this,IngresarActivity::class.java)
-                startActivity(intent)
-            })
+            val intent =Intent(this,IngresarActivity::class.java)
+            finish()
+            startActivity(intent)
+        })
         ventana.create().show()
     }
 

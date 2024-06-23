@@ -35,6 +35,7 @@ class IngresarActivity : AppCompatActivity() {
 
         btnRegister.setOnClickListener {
             val intent =Intent(this, RegistroActivity::class.java)
+            finish()
             startActivity(intent)
         }
 
@@ -57,6 +58,7 @@ class IngresarActivity : AppCompatActivity() {
                                 intent.putExtra("email", usuario.email)
                                 intent.putExtra("edad", usuario.edad)
                                 intent.putExtra("genero", usuario.genero)
+                                finish()
                                 startActivity(intent)
                             }
                         }
