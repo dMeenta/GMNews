@@ -42,12 +42,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun asignarRefencias(){
         var userId = intent.getIntExtra("id", 0)
+        println(userId)
         var userIdOnline = intent.getStringExtra("userIdOnline")
         var userPassword = intent.getStringExtra("userPassword")
-        var userName = intent.getStringExtra("nombre")
-        var userEmail = intent.getStringExtra("email")
-        var userEdad = intent.getIntExtra("edad", 0)
-        var userGenero = intent.getStringExtra("genero")
+        var userName = intent.getStringExtra("userName")
+        var userEmail = intent.getStringExtra("userEmail")
+        var userEdad = intent.getIntExtra("userEdad", 0)
+        var userGenero = intent.getStringExtra("userGenero")
+
+
         rvNoticias = findViewById(R.id.rvNews)
         rvNoticias.layoutManager = LinearLayoutManager(this)
         rvCategorias = findViewById(R.id.rvCategories)
@@ -55,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         btnProfile = findViewById(R.id.btnProfile)
         btnProfile.setOnClickListener{
             val intent = Intent(this, UserProfile::class.java)
-            intent.putExtra("userId", userId)
+            intent.putExtra("id", userId)
             intent.putExtra("userIdOnline", userIdOnline)
             intent.putExtra("userPassword", userPassword)
             intent.putExtra("userName", userName)
@@ -67,7 +70,13 @@ class MainActivity : AppCompatActivity() {
         btnExit = findViewById(R.id.btnExit)
         btnExit.setOnClickListener {
             val intent = Intent(this, ExitActivity::class.java)
+            intent.putExtra("id", userId)
+            intent.putExtra("userIdOnline", userIdOnline)
+            intent.putExtra("userPassword", userPassword)
             intent.putExtra("userName", userName)
+            intent.putExtra("userEmail", userEmail)
+            intent.putExtra("userEdad", userEdad)
+            intent.putExtra("userGenero", userGenero)
             startActivity(intent)
         }
     }

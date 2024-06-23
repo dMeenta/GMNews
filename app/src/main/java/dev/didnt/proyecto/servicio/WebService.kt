@@ -28,7 +28,7 @@ interface WebService {
     @POST("/usuarios/registrar")
     suspend fun registrarUsuario(@Body usuario: Usuario):Response<String>
 
-    @PUT("/usuarios/modificar/{id}")
+    @PATCH("/usuarios/modificar/{id}")
     suspend fun modificarUsuario(@Path("id") id:Int, @Body usuario: Usuario):Response<String>
 }
 

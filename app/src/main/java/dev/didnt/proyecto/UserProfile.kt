@@ -1,5 +1,6 @@
 package dev.didnt.proyecto
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -18,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserProfile : AppCompatActivity() {
+    private lateinit var btnExit: ImageButton
     private lateinit var btnHome: ImageButton
     private lateinit var btnGuardar: Button
     private lateinit var txtModifyName: EditText
@@ -50,20 +52,25 @@ class UserProfile : AppCompatActivity() {
         lblUserEdad = findViewById(R.id.lblEdadUser)
         lblUserGenero = findViewById(R.id.lblGeneroUser)
         lblUserEmail = findViewById(R.id.lblCorreoUser)
-        val userName = intent.getStringExtra("userName")
-        val userEmail = intent.getStringExtra("userEmail")
-        val idOnline = intent.getStringExtra("userIdOnline")
-        val userEdad = intent.getIntExtra("userEdad", 0).toString()
-        var userGenero:String
-        if(intent.getStringExtra("userGenero")=="M"){
+        btnExit = findViewById(R.id.btnExit)
+
+        var userId = intent.getIntExtra("id", 0)
+        println(userId)
+        var userIdOnline = intent.getStringExtra("userIdOnline")
+        var userPassword = intent.getStringExtra("userPassword")
+        var userName = intent.getStringExtra("userName")
+        var userEmail = intent.getStringExtra("userEmail")
+        var userEdad = intent.getIntExtra("userEdad", 0)
+        var userGenero = intent.getStringExtra("userGenero")
+        if(userGenero=="M"){
             userGenero = "Masculino"
         }else{
             userGenero = "Femenino"
         }
 
         lblUserName.text = userName
-        lblIdOnline.text = "idOnline: "+idOnline
-        lblUserEdad.text = "Edad: "+userEdad
+        lblIdOnline.text = "idOnline: "+userIdOnline
+        lblUserEdad.text = "Edad: "+userEdad.toString()
         lblUserGenero.text = "Genero: "+ userGenero
         lblUserEmail.text = userEmail
 
@@ -91,13 +98,32 @@ class UserProfile : AppCompatActivity() {
         }
         btnHome.setOnClickListener{
             finish()
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("id", userId)
+            intent.putExtra("userIdOnline", userIdOnline)
+            intent.putExtra("userPassword", userPassword)
+            intent.putExtra("userName", userName)
+            intent.putExtra("userEmail", userEmail)
+            intent.putExtra("userEdad", userEdad)
+            intent.putExtra("userGenero", userGenero)
+            startActivity(intent)
+        }
+        btnExit.setOnClickListener {
+            val intent = Intent(this, ExitActivity::class.java)
+            intent.putExtra("id", userId)
+            intent.putExtra("userIdOnline", userIdOnline)
+            intent.putExtra("userPassword", userPassword)
+            intent.putExtra("userName", userName)
+            intent.putExtra("userEmail", userEmail)
+            intent.putExtra("userEdad", userEdad)
+            intent.putExtra("userGenero", userGenero)
+            startActivity(intent)
         }
     }
-
     private fun actualizar(){
+        val id = intent.getIntExtra("id", 0)
         val nombre = txtModifyName.text.toString().trim()
         val email = txtModifyEmail.text.toString().trim()
-        val id = intent.getIntExtra("userId", 0)
 
         val user = Usuario(0, "", "", nombre, email, 0, "")
 
