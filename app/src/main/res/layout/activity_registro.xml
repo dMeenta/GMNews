@@ -82,7 +82,7 @@
                 android:drawableLeft="@drawable/icon_clave"
                 android:ems="10"
                 android:hint="Contraseña"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:padding="8dp" />
 
             <EditText
