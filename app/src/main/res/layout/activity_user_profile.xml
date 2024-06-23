@@ -123,12 +123,12 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/btnCalendar"
+            android:id="@+id/btnExit"
             android:layout_width="40dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@color/transparent"
-            app:srcCompat="@drawable/calendar" />
+            app:srcCompat="@drawable/exit"/>
 
         <ImageButton
             android:id="@+id/btnNews"

@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnProfile: ImageButton
     private lateinit var rvNoticias: RecyclerView
     private lateinit var rvCategorias: RecyclerView
+    private lateinit var btnExit: ImageButton
     private var adaptadorNoticias:AdaptadorPersonalizadoNoticias = AdaptadorPersonalizadoNoticias()
     private var adaptadorCategorias:AdaptadorPersonalizadoJuegos = AdaptadorPersonalizadoJuegos()
     private var listaNoticia:ArrayList<Noticia> = ArrayList()
@@ -61,6 +62,12 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("userEmail", userEmail)
             intent.putExtra("userEdad", userEdad)
             intent.putExtra("userGenero", userGenero)
+            startActivity(intent)
+        }
+        btnExit = findViewById(R.id.btnExit)
+        btnExit.setOnClickListener {
+            val intent = Intent(this, ExitActivity::class.java)
+            intent.putExtra("userName", userName)
             startActivity(intent)
         }
     }

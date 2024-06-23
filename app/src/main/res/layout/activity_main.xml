@@ -34,7 +34,7 @@
         android:gravity="center"
         >
         <ImageButton
-            android:id="@+id/btnCalendar"
+            android:id="@+id/btnExit"
             android:layout_width="40dp"
             android:layout_height="60dp"
             android:layout_weight="1"

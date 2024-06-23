@@ -16,10 +16,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".UserProfile"
+            android:name=".ExitActivity"
             android:exported="false" />
         <activity
-            android:name=".ModificarActivity"
+            android:name=".UserProfile"
             android:exported="false" />
         <activity
             android:name=".RegistroActivity"
