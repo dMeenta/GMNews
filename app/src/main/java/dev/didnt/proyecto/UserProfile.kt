@@ -6,17 +6,22 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import dev.didnt.proyecto.entidad.Usuario
+import dev.didnt.proyecto.servicio.RetrofitClient
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class UserProfile : AppCompatActivity() {
     private lateinit var btnHome: ImageButton
     private lateinit var btnGuardar: Button
     private lateinit var txtModifyName: EditText
     private lateinit var txtModifyEmail: EditText
-    private lateinit var txtModifyEdad: EditText
     private lateinit var btnEdit: ImageButton
     private lateinit var lblEditar: TextView
     private lateinit var lblUserEmail:TextView
@@ -24,6 +29,7 @@ class UserProfile : AppCompatActivity() {
     private lateinit var lblIdOnline:TextView
     private lateinit var lblUserEdad:TextView
     private lateinit var lblUserGenero:TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,36 +50,65 @@ class UserProfile : AppCompatActivity() {
         lblUserEdad = findViewById(R.id.lblEdadUser)
         lblUserGenero = findViewById(R.id.lblGeneroUser)
         lblUserEmail = findViewById(R.id.lblCorreoUser)
+        val userName = intent.getStringExtra("userName")
+        val userEmail = intent.getStringExtra("userEmail")
+        val idOnline = intent.getStringExtra("userIdOnline")
+        val userEdad = intent.getIntExtra("userEdad", 0).toString()
+        var userGenero:String
+        if(intent.getStringExtra("userGenero")=="M"){
+            userGenero = "Masculino"
+        }else{
+            userGenero = "Femenino"
+        }
 
-        lblUserName.setText(intent.getStringExtra("userName"))
-        lblIdOnline.setText("idOnline: "+intent.getStringExtra("userIdOnline"))
-        lblUserEdad.setText("Edad: "+intent.getIntExtra("userEdad", 0).toString())
-        lblUserGenero.setText("Genero: "+intent.getStringExtra("userGenero"))
-        lblUserEmail.setText(intent.getStringExtra("userEmail"))
-
+        lblUserName.text = userName
+        lblIdOnline.text = "idOnline: "+idOnline
+        lblUserEdad.text = "Edad: "+userEdad
+        lblUserGenero.text = "Genero: "+ userGenero
+        lblUserEmail.text = userEmail
 
         lblEditar = findViewById(R.id.lblEditar)
         btnGuardar = findViewById(R.id.btnGuardar)
         txtModifyName = findViewById(R.id.txtModifyName)
         txtModifyEmail = findViewById(R.id.txtModifyEmail)
-        txtModifyEdad = findViewById(R.id.txtModifyEdad)
         btnEdit = findViewById(R.id.btnEdit)
         btnEdit.setOnClickListener{
             txtModifyName.visibility = View.VISIBLE
             txtModifyEmail.visibility = View.VISIBLE
-            txtModifyEdad.visibility = View.VISIBLE
             btnGuardar.visibility = View.VISIBLE
             lblEditar.visibility = View.VISIBLE
+
+            txtModifyName.setText(userName)
+            txtModifyEmail.setText(userEmail)
+
         }
         btnGuardar.setOnClickListener {
             txtModifyName.visibility = View.INVISIBLE
             txtModifyEmail.visibility = View.INVISIBLE
-            txtModifyEdad.visibility = View.INVISIBLE
             btnGuardar.visibility = View.INVISIBLE
             lblEditar.visibility = View.INVISIBLE
+            actualizar()
         }
         btnHome.setOnClickListener{
             finish()
         }
     }
+
+    private fun actualizar(){
+        val nombre = txtModifyName.text.toString().trim()
+        val email = txtModifyEmail.text.toString().trim()
+        val id = intent.getIntExtra("userId", 0)
+
+        val user = Usuario(0, "", "", nombre, email, 0, "")
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val res = RetrofitClient.webService.modificarUsuario(id, user)
+            runOnUiThread {
+                if(res.isSuccessful){
+                    Toast.makeText(baseContext, res.body().toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
 }

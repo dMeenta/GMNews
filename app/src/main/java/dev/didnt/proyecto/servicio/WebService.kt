@@ -8,10 +8,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 object AppConstantes{
-    const val BASE_URL = "http://:3000" //Añadir ip
+    const val BASE_URL = "http://:3001" //Añadir ip
 }
 
 interface WebService {
@@ -27,6 +28,8 @@ interface WebService {
     @POST("/usuarios/registrar")
     suspend fun registrarUsuario(@Body usuario: Usuario):Response<String>
 
+    @PUT("/usuarios/modificar/{id}")
+    suspend fun modificarUsuario(@Path("id") id:Int, @Body usuario: Usuario):Response<String>
 }
 
 object RetrofitClient{
