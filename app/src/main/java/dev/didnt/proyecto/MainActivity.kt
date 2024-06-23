@@ -40,7 +40,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun asignarRefencias(){
-        var userId = intent.getStringExtra("idOnline")
+        var userId = intent.getIntExtra("id", 0)
+        var userIdOnline = intent.getStringExtra("userIdOnline")
         var userPassword = intent.getStringExtra("userPassword")
         var userName = intent.getStringExtra("nombre")
         var userEmail = intent.getStringExtra("email")
@@ -54,12 +55,12 @@ class MainActivity : AppCompatActivity() {
         btnProfile.setOnClickListener{
             val intent = Intent(this, UserProfile::class.java)
             intent.putExtra("userId", userId)
+            intent.putExtra("userIdOnline", userIdOnline)
             intent.putExtra("userPassword", userPassword)
             intent.putExtra("userName", userName)
             intent.putExtra("userEmail", userEmail)
             intent.putExtra("userEdad", userEdad)
             intent.putExtra("userGenero", userGenero)
-            finish()
             startActivity(intent)
         }
     }

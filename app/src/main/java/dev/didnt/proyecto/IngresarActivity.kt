@@ -44,7 +44,7 @@ class IngresarActivity : AppCompatActivity() {
             val userPassword = txtPassword.text.toString().trim()
 
             if (idOnline.isNotEmpty() && userPassword.isNotEmpty()) {
-                val user = Usuario(idOnline, userPassword, "", "", 0, "")
+                val user = Usuario(0,idOnline, userPassword, "", "", 0, "")
                 CoroutineScope(Dispatchers.IO).launch {
                     val res = RetrofitClient.webService.login(user)
                     runOnUiThread {
@@ -52,7 +52,8 @@ class IngresarActivity : AppCompatActivity() {
                             val usuario = res.body()
                             if(usuario != null){
                                 val intent = Intent(this@IngresarActivity, MainActivity::class.java)
-                                intent.putExtra("idOnline", usuario.idOnline)
+                                intent.putExtra("id", usuario.id)
+                                intent.putExtra("userIdOnline", usuario.idOnline)
                                 intent.putExtra("userPassword", usuario.userPassword)
                                 intent.putExtra("nombre", usuario.nombre)
                                 intent.putExtra("email", usuario.email)

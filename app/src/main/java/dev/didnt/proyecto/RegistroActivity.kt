@@ -112,7 +112,7 @@ class RegistroActivity : AppCompatActivity() {
         val edad =calcularEdad(fechaNacimiento)
         val genero = if (btnM.isChecked) "M" else if (btnF.isChecked) "F" else ""
 
-        val usuario = Usuario(idOnline,password,nombre,email,edad,genero)
+        val usuario = Usuario(0,idOnline,password,nombre,email,edad,genero)
 
         CoroutineScope(Dispatchers.IO).launch {
             val rpta = RetrofitClient.webService.registrarUsuario(usuario)
