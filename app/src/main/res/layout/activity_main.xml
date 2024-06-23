@@ -39,7 +39,7 @@
             android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@color/transparent"
-            app:srcCompat="@drawable/calendar"/>
+            app:srcCompat="@drawable/exit"/>
 
         <ImageButton
             android:id="@+id/btnNews"
