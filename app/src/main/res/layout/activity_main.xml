@@ -1,97 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/black">
+    tools:context=".MainActivity"
+    android:background="@color/black"
+    android:orientation="vertical">
 
-        <!--Categories-->
-        <LinearLayout
+    <!--Categories-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:scrollbarSize="0dp"
+        android:id="@+id/rvCategories"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:orientation="vertical"
-        android:background="@color/black">
-            <androidx.recyclerview.widget.RecyclerView
-                android:scrollbarSize="0dp"
-                android:id="@+id/rvCategories"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="horizontal"
-                tools:listitem="@layout/category_component" />
-        </LinearLayout>
+        android:scrollbars="horizontal"
+        tools:listitem="@layout/category_component"/>
 
-        <!--News-->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvNews"
-            android:layout_width="match_parent"
-            android:layout_height="560dp"
-            android:background="@color/black"
-            tools:listitem="@layout/news_component" />
+    <!--News-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvNews"
+        android:layout_width="match_parent"
+        android:layout_height="560dp"
+        android:background="@color/black"
+        tools:listitem="@layout/news_component" />
 
-        <!--Footer-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_gravity="bottom"
-            android:gravity="bottom">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:background="@color/black"
-                android:orientation="horizontal"
-                android:gravity="center"
-                >
-                <ImageButton
-                    android:id="@+id/btnCalendar"
-                    android:layout_width="40dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:background="@color/transparent"
-                    app:srcCompat="@drawable/calendar"/>
+    <!--Footer-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <ImageButton
+            android:id="@+id/btnCalendar"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            app:srcCompat="@drawable/calendar"/>
 
-                <ImageButton
-                    android:id="@+id/btnNews"
-                    android:layout_width="40dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:background="@color/transparent"
-                    app:srcCompat="@drawable/news"/>
+        <ImageButton
+            android:id="@+id/btnNews"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            app:srcCompat="@drawable/news"/>
+        <ImageButton
+            android:id="@+id/btnHome"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            app:srcCompat="@drawable/home"/>
 
-                <ImageButton
-                    android:id="@+id/btnHome"
-                    android:layout_width="40dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:background="@color/transparent"
-                    app:srcCompat="@drawable/home"/>
-
-                <ImageButton
-                    android:id="@+id/btnMessages"
-                    android:layout_width="40dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:background="@color/transparent"
-                    app:srcCompat="@drawable/chats"/>
-
-                <ImageButton
-                    android:id="@+id/btnProfile"
-                    android:layout_width="40dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:background="@color/transparent"
-                    app:srcCompat="@drawable/profile"/>
-            </LinearLayout>
-        </LinearLayout>
+        <ImageButton
+            android:id="@+id/btnMessages"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            app:srcCompat="@drawable/chats"/>
+        <ImageButton
+            android:id="@+id/btnProfile"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            app:srcCompat="@drawable/profile"/>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
