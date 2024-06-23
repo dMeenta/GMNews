@@ -10,13 +10,15 @@
 
     <EditText
         android:id="@+id/txtLoginUsername"
-        android:layout_width="wrap_content"
+        android:layout_width="265dp"
         android:layout_height="50dp"
         android:layout_marginTop="236dp"
         android:ems="10"
+        android:textAlignment="center"
         android:hint="Usuario..."
         android:inputType="text"
         android:textColor="@color/white"
+        android:background="@drawable/login_input_bg"
         android:textColorHint="@color/light_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,13 +39,15 @@
 
     <EditText
         android:id="@+id/txtLoginPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="265dp"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Password..."
+        android:textAlignment="center"
         android:inputType="textPassword"
         android:textColor="@color/white"
+        android:background="@drawable/login_input_bg"
         android:textColorHint="@color/light_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

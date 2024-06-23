@@ -12,12 +12,11 @@
 
 
     <androidx.cardview.widget.CardView
-        android:alpha="0.7"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_margin="50dp"
-        android:background="@drawable/borde"
         app:cardCornerRadius="30dp"
+        android:alpha="0.75"
         app:cardElevation="20dp">
 
         <LinearLayout
@@ -41,6 +40,7 @@
                 android:id="@+id/registroNombre"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:textColorHint="@color/gray"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/borde"
                 android:drawableLeft="@drawable/icon_person"
@@ -55,6 +55,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/borde"
+                android:textColorHint="@color/gray"
                 android:drawableLeft="@drawable/icon_person"
                 android:ems="10"
                 android:hint="Ingresar Usuario"
@@ -67,6 +68,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/borde"
+                android:textColorHint="@color/gray"
                 android:drawableLeft="@drawable/icon_correo"
                 android:ems="10"
                 android:hint="Ingresar Correo"
@@ -79,6 +81,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/borde"
+                android:textColorHint="@color/gray"
                 android:drawableLeft="@drawable/icon_clave"
                 android:ems="10"
                 android:hint="Contraseña"
@@ -91,6 +94,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/borde"
+                android:textColorHint="@color/gray"
                 android:drawableLeft="@drawable/icon_date"
                 android:ems="10"
                 android:inputType="date"
