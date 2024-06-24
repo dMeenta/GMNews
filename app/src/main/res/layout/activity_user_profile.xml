@@ -113,8 +113,6 @@
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"

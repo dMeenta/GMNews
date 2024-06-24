@@ -13,7 +13,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class ExitActivity : AppCompatActivity() {
-
     private lateinit var btnHome:ImageButton
     private lateinit var btnCerrar:Button
     private lateinit var lblUserName:TextView

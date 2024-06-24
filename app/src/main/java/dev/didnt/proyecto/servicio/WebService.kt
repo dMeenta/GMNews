@@ -18,20 +18,15 @@ object AppConstantes{
 interface WebService {
     @GET("/news")
     suspend fun obtenerNoticias(): Response<NoticiaResponse>
-
     @GET("/games")
     suspend fun obtenerJuegos(): Response<JuegoResponse>
-
     @POST("/login")
     suspend fun login(@Body usuario: Usuario): Response<Usuario>
-
     @POST("/usuarios/registrar")
     suspend fun registrarUsuario(@Body usuario: Usuario):Response<String>
-
     @PATCH("/usuarios/modificar/{id}")
     suspend fun modificarUsuario(@Path("id") id:Int, @Body usuario: Usuario):Response<String>
 }
-
 object RetrofitClient{
     val webService:WebService by lazy {
         Retrofit.Builder()

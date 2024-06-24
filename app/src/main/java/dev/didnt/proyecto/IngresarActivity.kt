@@ -1,7 +1,6 @@
 package dev.didnt.proyecto
 
 import android.content.Intent
-import android.content.SyncRequest
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -17,7 +16,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class IngresarActivity : AppCompatActivity() {
-
     private lateinit var txtUsername:EditText
     private lateinit var txtPassword:EditText
     private lateinit var btnLogin:Button
@@ -69,7 +67,6 @@ class IngresarActivity : AppCompatActivity() {
                 Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
