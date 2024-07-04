@@ -5,70 +5,55 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/black"
     tools:context=".MainActivity"
     android:background="@color/black"
     android:orientation="vertical">
 
-    <!--Categories-->
-    <androidx.recyclerview.widget.RecyclerView
-        android:scrollbarSize="0dp"
-        android:id="@+id/rvCategories"
+    <androidx.viewpager2.widget.ViewPager2
+        android:background="@color/transparent"
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:scrollbars="horizontal"
-        tools:listitem="@layout/category_component"/>
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <!--News-->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvNews"
+    <com.google.android.material.tabs.TabLayout
+        android:background="@color/transparent"
+        app:tabTextColor="@color/white"
+        app:tabIndicatorFullWidth="true"
+        app:tabIndicatorAnimationMode="linear"
+        app:tabIndicatorColor="#F44336"
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="560dp"
-        android:background="@color/black"
-        tools:listitem="@layout/news_component" />
+        app:tabIconTint="@color/white"
+        app:tabIndicatorGravity="top"
+        android:layout_height="60dp">
 
-    <!--Footer-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        >
-        <ImageButton
-            android:id="@+id/btnExit"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            app:srcCompat="@drawable/exit"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/exit" />
 
-        <ImageButton
-            android:id="@+id/btnNews"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            app:srcCompat="@drawable/news"/>
-        <ImageButton
-            android:id="@+id/btnHome"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            app:srcCompat="@drawable/home"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/news" />
 
-        <ImageButton
-            android:id="@+id/btnMessages"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            app:srcCompat="@drawable/chats"/>
-        <ImageButton
-            android:id="@+id/btnProfile"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            app:srcCompat="@drawable/profile"/>
-    </LinearLayout>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/home" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/chats" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/profile" />
+    </com.google.android.material.tabs.TabLayout>
+
+
 </LinearLayout>
