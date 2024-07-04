@@ -1,15 +1,18 @@
-package dev.didnt.proyecto
+package dev.didnt.proyecto.adaptadores
 
+import android.provider.ContactsContract.CommonDataKinds.Im
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import dev.didnt.proyecto.R
 import dev.didnt.proyecto.entidad.Juego
 
-class AdaptadorPersonalizadoJuegos: RecyclerView.Adapter<AdaptadorPersonalizadoJuegos.MiViewHolder>() {
+class RvAdapterCategorias: RecyclerView.Adapter<RvAdapterCategorias.MiViewHolder>() {
 
     private var listaJuegos:ArrayList<Juego> = ArrayList()
 
@@ -26,11 +29,11 @@ class AdaptadorPersonalizadoJuegos: RecyclerView.Adapter<AdaptadorPersonalizadoJ
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = AdaptadorPersonalizadoJuegos.MiViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MiViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.category_component, parent, false)
         )
 
-    override fun onBindViewHolder(holder: AdaptadorPersonalizadoJuegos.MiViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MiViewHolder, position: Int) {
         val categoriaItem = listaJuegos[position]
         holder.setValoresJuego(categoriaItem)
     }

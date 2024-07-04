@@ -1,4 +1,4 @@
-package dev.didnt.proyecto
+package dev.didnt.proyecto.adaptadores
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
+import dev.didnt.proyecto.R
 import dev.didnt.proyecto.entidad.Noticia
 import kotlin.random.Random
 
-class AdaptadorPersonalizadoNoticias: RecyclerView.Adapter<AdaptadorPersonalizadoNoticias.MiViewHolder>() {
+class RvAdapterNoticias: RecyclerView.Adapter<RvAdapterNoticias.MiViewHolder>() {
 
     private var listaNoticias:ArrayList<Noticia> = ArrayList()
 
@@ -33,7 +34,7 @@ class AdaptadorPersonalizadoNoticias: RecyclerView.Adapter<AdaptadorPersonalizad
         LayoutInflater.from(parent.context).inflate(R.layout.news_component,parent,false)
     )
 
-    override fun onBindViewHolder(holder: AdaptadorPersonalizadoNoticias.MiViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MiViewHolder, position: Int) {
         val noticiaItem = listaNoticias[position]
         holder.setValoresNoticia(noticiaItem)
         val num = Random.nextInt(1, 5)
