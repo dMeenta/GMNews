@@ -21,23 +21,19 @@ class ViewPagerAdapter (
     override fun getItemCount(): Int {
         return 5
     }
-
     override fun createFragment(position: Int): Fragment {
         return when (position){
-            0->{ val exit = ExitFragment()
-                exit.arguments=extras
-                return exit
-            }
+            0->{HomeFragment()}
             1->{CategoryFragment()}
-            2->{HomeFragment()}
+            2->{val profile = ProfileFragment()
+                profile.arguments=extras
+                return profile}
             3->{val friends = FriendsFragment()
                 friends.arguments=extras
-                return friends
-            }
-            4->{val profile = ProfileFragment()
-                profile.arguments=extras
-                return profile
-            }
+                return friends}
+            4->{val exit = ExitFragment()
+                exit.arguments=extras
+                return exit}
             else -> {HomeFragment()}
         }
 
