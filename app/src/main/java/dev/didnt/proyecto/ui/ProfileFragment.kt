@@ -1,6 +1,8 @@
 package dev.didnt.proyecto.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +12,6 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import dev.didnt.proyecto.R
 import dev.didnt.proyecto.entidad.Usuario
 import dev.didnt.proyecto.servicio.RetrofitClient
@@ -19,17 +20,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
-    private lateinit var txtModifyName: EditText
-    private lateinit var txtModifyEmail: EditText
-    private lateinit var btnEdit: ImageButton
-    private lateinit var btnGuardar: Button
+
     private lateinit var lblUserName: TextView
     private lateinit var lblIdOnline: TextView
     private lateinit var lblUserEdad: TextView
     private lateinit var lblUserGenero: TextView
     private lateinit var lblUserEmail: TextView
-    private lateinit var editForm: LinearLayout
+    private lateinit var btnEdit: ImageButton
 
+    private lateinit var editForm:LinearLayout
+    private lateinit var txtModifyName: EditText
+    private lateinit var txtModifyEmail: EditText
+    private lateinit var btnGuardar: Button
+
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,7 +47,7 @@ class ProfileFragment : Fragment() {
         var userEmail = arguments?.getString("userEmail")
         var userEdad = arguments?.getInt("userEdad", 0)
         var userGenero = arguments?.getString("userGenero")
-        var gender:String
+        val gender:String
         if(userGenero=="M"){
             gender = "Masculino"
         }else{
@@ -55,24 +59,24 @@ class ProfileFragment : Fragment() {
         lblUserEdad = view.findViewById(R.id.lblEdadUser)
         lblUserGenero = view.findViewById(R.id.lblGeneroUser)
         lblUserEmail = view.findViewById(R.id.lblCorreoUser)
-        editForm = view.findViewById(R.id.editForm)
 
         lblUserName.text = userName
         lblIdOnline.text = "idOnline: "+userIdOnline
         lblUserEdad.text = "Edad: "+userEdad.toString()
-        lblUserGenero.text = "Genero: "+ gender
+        lblUserGenero.text = "Género: "+ gender
         lblUserEmail.text = userEmail
 
+        editForm = view.findViewById(R.id.editForm)
         btnGuardar = view.findViewById(R.id.btnGuardar)
         txtModifyName = view.findViewById(R.id.txtModifyName)
         txtModifyEmail = view.findViewById(R.id.txtModifyEmail)
         btnEdit = view.findViewById(R.id.btnEdit)
+
         btnEdit.setOnClickListener{
             editForm.visibility = View.VISIBLE
 
             txtModifyName.setText(userName)
             txtModifyEmail.setText(userEmail)
-
         }
         btnGuardar.setOnClickListener {
             editForm.visibility = View.GONE
@@ -82,17 +86,20 @@ class ProfileFragment : Fragment() {
         return view
     }
     private fun actualizar(id:Int?){
+
         val nombre = txtModifyName.text.toString().trim()
         val email = txtModifyEmail.text.toString().trim()
 
         val user = Usuario(0, "", "", nombre, email, 0, "")
 
         CoroutineScope(Dispatchers.IO).launch {
-            val res = RetrofitClient.webService.modificarUsuario(id, user)
-            requireActivity().runOnUiThread {
-                if(res.isSuccessful){
-                    Toast.makeText(context, res.body().toString(), Toast.LENGTH_SHORT).show()
-                }
+            val rpta = id?.let { RetrofitClient.webService.modificarUsuario(it, user) }
+                requireActivity().runOnUiThread {
+                    if (rpta != null) {
+                        if(rpta.isSuccessful){
+                            Toast.makeText(context, rpta.body().toString(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
             }
         }
     }

@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.RadioButton
 import androidx.activity.enableEdgeToEdge
@@ -56,7 +55,6 @@ class RegistroActivity : AppCompatActivity() {
         btnM= findViewById(R.id.btnM)
         btnF= findViewById(R.id.btnF)
 
-
         btnRegistrar = findViewById(R.id.btnRegistrar)
         btnRegistrar.setOnClickListener {
             if (validarCampos()) {
@@ -71,16 +69,11 @@ class RegistroActivity : AppCompatActivity() {
     }
 
     private fun showDatePicker() {
-
         val datePickerDialog = DatePickerDialog(
             this, {DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
-
                 val selectedDate = Calendar.getInstance()
-
                 selectedDate.set(year, monthOfYear, dayOfMonth)
-
                 val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-
                 val formattedDate = dateFormat.format(selectedDate.time)
 
                 registroFecha.setText(formattedDate)
@@ -89,7 +82,6 @@ class RegistroActivity : AppCompatActivity() {
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
-
         datePickerDialog.show()
     }
 
@@ -125,7 +117,6 @@ class RegistroActivity : AppCompatActivity() {
 
     }
 
-
     private fun calcularEdad(fechaNacimiento: String): Int {
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val nacimiento = sdf.parse(fechaNacimiento)
@@ -138,7 +129,6 @@ class RegistroActivity : AppCompatActivity() {
         }
         return edad
     }
-
 
     private fun mostrarMensajeS(mensaje:String){
         val ventana = AlertDialog.Builder(this)
