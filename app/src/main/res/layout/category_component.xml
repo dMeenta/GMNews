@@ -2,27 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="200dp"
-    android:layout_height="350dp"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
     android:orientation="vertical"
     android:gravity="center">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgCategory"
-        android:layout_width="180dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scaleType="centerCrop"
-        />
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:scaleType="fitXY"
+        app:shapeAppearanceOverlay="@style/category_radius"
+        android:background="@color/black" />
 
     <TextView
         android:id="@+id/lblCategory"
-        android:layout_width="180dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Categoria"
         android:textColor="@color/white"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="18dp"/>
+        tools:layout_editor_absoluteX="21dp"
+        tools:layout_editor_absoluteY="75dp"
+        tools:ignore="MissingConstraints"
+        android:textSize="10dp"/>
 
 </LinearLayout>
