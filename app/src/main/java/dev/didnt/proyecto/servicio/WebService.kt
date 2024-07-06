@@ -25,7 +25,7 @@ interface WebService {
     @POST("/usuarios/registrar")
     suspend fun registrarUsuario(@Body usuario: Usuario):Response<String>
     @PATCH("/usuarios/modificar/{id}")
-    suspend fun modificarUsuario(@Path("id") id:Int, @Body usuario: Usuario):Response<String>
+    suspend fun modificarUsuario(@Path("id") id: Int?, @Body usuario: Usuario):Response<String>
 }
 object RetrofitClient{
     val webService:WebService by lazy {
