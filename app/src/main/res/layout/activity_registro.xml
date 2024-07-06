@@ -29,132 +29,151 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_margin="50dp"
-            app:cardCornerRadius="30dp"
-            android:alpha="0.75"
-            app:cardElevation="20dp">
-
-            <LinearLayout
-                android:gravity="center"
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:background="@drawable/register_bg">
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:layout_gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="24dp">
+                android:layout_height="40dp"
+                android:text="Registrarse"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
 
-                <TextView
+            <EditText
+                android:id="@+id/registroNombre"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColorHint="@color/light_gray"
+                android:textColor="@color/white"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/borde"
+                android:drawableTint="@color/white"
+                android:drawableStart="@drawable/icon_person"
+                android:drawablePadding="7dp"
+                android:hint="Nombre..."
+                android:inputType="text"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/registroUser"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColorHint="@color/light_gray"
+                android:textColor="@color/white"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/borde"
+                android:drawableTint="@color/white"
+                android:drawableStart="@drawable/icon_person"
+                android:drawablePadding="7dp"
+                android:hint="Usuario..."
+                android:inputType="text"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/registroCorreo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColorHint="@color/light_gray"
+                android:textColor="@color/white"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/borde"
+                android:drawableTint="@color/white"
+                android:drawableStart="@drawable/icon_correo"
+                android:drawablePadding="7dp"
+                android:hint="Correo..."
+                android:inputType="text"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/registroContra"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColorHint="@color/light_gray"
+                android:textColor="@color/white"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/borde"
+                android:drawableTint="@color/white"
+                android:drawableStart="@drawable/icon_clave"
+                android:drawablePadding="7dp"
+                android:hint="Contraseña..."
+                android:inputType="textPassword"
+                android:padding="8dp" />
+
+            <EditText
+                android:id="@+id/registroFecha"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColorHint="@color/light_gray"
+                android:textColor="@color/white"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/borde"
+                android:drawableTint="@color/white"
+                android:drawableStart="@drawable/icon_date"
+                android:drawablePadding="7dp"
+                android:inputType="date"
+                android:clickable="true"
+                android:focusable="false"
+                android:maxLines="1"
+                android:hint="Fecha de nacimiento"
+                android:padding="8dp"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                >
+
+                <RadioButton
+                    android:id="@+id/btnM"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text="Registrarse"
-                    android:textAlignment="center"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="25dp"
-                    android:textStyle="bold"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="Masculino"
+                    android:textColor="@color/white"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_btn_bg"
+                    android:drawablePadding="10dp" />
 
-                <EditText
-                    android:id="@+id/registroNombre"
+                <RadioButton
+                    android:id="@+id/btnF"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:textColorHint="@color/gray"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/borde"
-                    android:drawableLeft="@drawable/icon_person"
-                    android:ems="10"
-                    android:hint="Ingresar Nombre"
-                    android:inputType="text"
-                    android:padding="8dp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="Femenino"
+                    android:textColor="@color/white"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/radio_btn_bg"
+                    android:drawablePadding="10dp" />
 
-                <EditText
-                    android:id="@+id/registroUser"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/borde"
-                    android:textColorHint="@color/gray"
-                    android:drawableLeft="@drawable/icon_person"
-                    android:ems="10"
-                    android:hint="Ingresar Usuario"
-                    android:inputType="text"
-                    android:padding="8dp" />
+            </RadioGroup>
 
-                <EditText
-                    android:id="@+id/registroCorreo"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/borde"
-                    android:textColorHint="@color/gray"
-                    android:drawableLeft="@drawable/icon_correo"
-                    android:ems="10"
-                    android:hint="Ingresar Correo"
-                    android:inputType="text"
-                    android:padding="8dp" />
+            <Button
+                android:id="@+id/btnRegistrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Registrar"
+                android:textSize="18sp"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/black"
+                />
 
-                <EditText
-                    android:id="@+id/registroContra"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/borde"
-                    android:textColorHint="@color/gray"
-                    android:drawableLeft="@drawable/icon_clave"
-                    android:ems="10"
-                    android:hint="Contraseña"
-                    android:inputType="textPassword"
-                    android:padding="8dp" />
-
-                <EditText
-                    android:id="@+id/registroFecha"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/borde"
-                    android:textColorHint="@color/gray"
-                    android:drawableLeft="@drawable/icon_date"
-                    android:ems="10"
-                    android:inputType="date"
-                    android:focusable="false"
-                    android:clickable="true"
-                    android:maxLines="1"
-                    android:hint="Fecha de nacimiento"
-                    android:padding="8dp"/>
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/btnM"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:text="Masculino" />
-                    <RadioButton
-                        android:id="@+id/btnF"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:text="Femenino" />
-                </RadioGroup>
-
-                <Button
-                    android:id="@+id/btnRegistrar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:text="Registrar"
-                    android:textSize="18sp"
-                    />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
