@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import android.widget.VideoView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import dev.didnt.proyecto.entidad.Usuario
+import dev.didnt.proyecto.entidad.VideoLoop
 import dev.didnt.proyecto.servicio.RetrofitClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,11 +22,17 @@ class IngresarActivity : AppCompatActivity() {
     private lateinit var txtPassword:EditText
     private lateinit var btnLogin:Button
     private lateinit var btnRegister:Button
+    private lateinit var background:VideoView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_ingresar)
+
+        background = findViewById(R.id.videoView)
+        background.setVideoPath("android.resource://"+packageName+"/"+R.raw.app_bg)
+        background.setOnPreparedListener(VideoLoop())
+        background.start()
 
         txtUsername = findViewById(R.id.txtLoginUsername)
         txtPassword = findViewById(R.id.txtLoginPassword)
@@ -33,7 +41,6 @@ class IngresarActivity : AppCompatActivity() {
 
         btnRegister.setOnClickListener {
             val intent =Intent(this, RegistroActivity::class.java)
-            finish()
             startActivity(intent)
         }
 
@@ -72,5 +79,14 @@ class IngresarActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+    override fun onPause() {
+        super.onPause()
+        background.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        background.start()
     }
 }

@@ -7,12 +7,14 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
+import android.widget.VideoView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import dev.didnt.proyecto.entidad.Usuario
+import dev.didnt.proyecto.entidad.VideoLoop
 import dev.didnt.proyecto.servicio.RetrofitClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +33,7 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var btnF:RadioButton
     private lateinit var btnM:RadioButton
     private val calendar = Calendar.getInstance()
+    private lateinit var background: VideoView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +48,7 @@ class RegistroActivity : AppCompatActivity() {
     }
 
     fun asigarnarReferencias(){
+        background = findViewById(R.id.videoView)
         registroNombre = findViewById(R.id.registroNombre)
         registroUser = findViewById(R.id.registroUser)
         registroCorreo = findViewById(R.id.registroCorreo)
@@ -66,6 +70,9 @@ class RegistroActivity : AppCompatActivity() {
         registroFecha.setOnClickListener{
             showDatePicker()
         }
+        background.setVideoPath("android.resource://"+packageName+"/"+R.raw.app_bg)
+        background.setOnPreparedListener(VideoLoop())
+        background.start()
     }
 
     private fun showDatePicker() {
@@ -149,6 +156,14 @@ class RegistroActivity : AppCompatActivity() {
         ventana.setPositiveButton("Aceptar", null)
         ventana.create().show()
     }
+    override fun onPause() {
+        super.onPause()
+        background.pause()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        background.start()
+    }
 }
 
