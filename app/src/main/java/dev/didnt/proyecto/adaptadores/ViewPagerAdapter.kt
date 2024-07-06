@@ -25,12 +25,12 @@ class ViewPagerAdapter (
         return when (position){
             0->{HomeFragment()}
             1->{CategoryFragment()}
-            2->{val profile = ProfileFragment()
-                profile.arguments=extras
-                return profile}
-            3->{val friends = FriendsFragment()
+            2->{val friends = FriendsFragment()
                 friends.arguments=extras
                 return friends}
+            3->{val profile = ProfileFragment()
+                profile.arguments=extras
+                return profile}
             4->{val exit = ExitFragment()
                 exit.arguments=extras
                 return exit}
