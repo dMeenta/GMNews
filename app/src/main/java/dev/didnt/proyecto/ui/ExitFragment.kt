@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.app.TaskStackBuilder
+import com.google.firebase.auth.FirebaseAuth
 import dev.didnt.proyecto.IngresarActivity
 import dev.didnt.proyecto.R
 
@@ -29,6 +30,7 @@ class ExitFragment : Fragment() {
 
         lblUserName.text = userName + " :( ?"
         btnExit.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
             val activity = requireActivity()
             val taskStackBuilder = TaskStackBuilder.create(activity)
                 .addNextIntent(Intent(activity, IngresarActivity::class.java))

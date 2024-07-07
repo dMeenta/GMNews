@@ -23,7 +23,8 @@
         android:orientation="vertical"
         android:background="@drawable/profile_bg"
         android:alpha="0.5"
-        android:gravity="center"/>
+        android:gravity="center">
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -169,10 +170,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Registrar"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 android:backgroundTint="@color/white"
                 android:textColor="@color/black"
                 />
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="@color/white"
+                android:text="Cancelar"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
 
         </LinearLayout>
     </LinearLayout>

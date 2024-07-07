@@ -22,7 +22,7 @@
         app:tabTextColor="@color/white"
         app:tabIndicatorFullWidth="true"
         app:tabIndicatorAnimationMode="linear"
-        app:tabIndicatorColor="#F44336"
+        app:tabIndicatorColor="#334BA1"
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         app:tabIconTint="@color/white"

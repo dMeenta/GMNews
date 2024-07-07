@@ -1,24 +1,23 @@
 package dev.didnt.proyecto
 
 import android.app.DatePickerDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
+import android.widget.Toast
 import android.widget.VideoView
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import dev.didnt.proyecto.entidad.Usuario
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import dev.didnt.proyecto.entidad.VideoLoop
-import dev.didnt.proyecto.servicio.RetrofitClient
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -34,6 +33,9 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var btnM:RadioButton
     private val calendar = Calendar.getInstance()
     private lateinit var background: VideoView
+    private lateinit var auth:FirebaseAuth
+    private lateinit var reference:DatabaseReference
+    private lateinit var btnCancelar:Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +50,7 @@ class RegistroActivity : AppCompatActivity() {
     }
 
     fun asigarnarReferencias(){
+        auth = Firebase.auth
         background = findViewById(R.id.videoView)
         registroNombre = findViewById(R.id.registroNombre)
         registroUser = findViewById(R.id.registroUser)
@@ -55,20 +58,20 @@ class RegistroActivity : AppCompatActivity() {
         registroContra = findViewById(R.id.registroContra)
         registroFecha= findViewById(R.id.registroFecha)
         registroUser = findViewById(R.id.registroUser)
+        btnCancelar = findViewById(R.id.btnCancelar)
 
         btnM= findViewById(R.id.btnM)
         btnF= findViewById(R.id.btnF)
 
         btnRegistrar = findViewById(R.id.btnRegistrar)
         btnRegistrar.setOnClickListener {
-            if (validarCampos()) {
-                agregar()
-            } else {
-                mostrarMensaje("Debe completar los campos obligatorios.")
-            }
+            validarCampos()
         }
         registroFecha.setOnClickListener{
             showDatePicker()
+        }
+        btnCancelar.setOnClickListener{
+            finish()
         }
         background.setVideoPath("android.resource://"+packageName+"/"+R.raw.app_bg)
         background.setOnPreparedListener(VideoLoop())
@@ -92,36 +95,55 @@ class RegistroActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-    private fun validarCampos():Boolean {
-        val nombre = registroNombre.text
-        val idOnline = registroUser.text
-        val correo = registroCorreo.text
-        val password = registroContra.text
-        val fechaNacimiento = registroFecha.text
-
-        return nombre.isNotEmpty() && correo.isNotEmpty() && password.isNotEmpty() && fechaNacimiento.isNotEmpty() && idOnline.isNotEmpty()
-    }
-
-    private fun agregar(){
-        val idOnline =registroUser.text.toString()
-        val password = registroContra.text.toString()
+    private fun validarCampos() {
         val nombre = registroNombre.text.toString()
-        val email = registroCorreo.text.toString()
+        val idOnline = registroUser.text.toString()
+        val correo = registroCorreo.text.toString()
+        val password = registroContra.text.toString()
         val fechaNacimiento = registroFecha.text.toString()
         val edad =calcularEdad(fechaNacimiento)
-        val genero = if (btnM.isChecked) "M" else if (btnF.isChecked) "F" else ""
+        val genero = if (btnM.isChecked) "Masculino" else if (btnF.isChecked) "Femenino" else "No Especificado"
 
-        val usuario = Usuario(0,idOnline,password,nombre,email,edad,genero)
-
-        CoroutineScope(Dispatchers.IO).launch {
-            val rpta = RetrofitClient.webService.registrarUsuario(usuario)
-            runOnUiThread {
-                if(rpta.isSuccessful){
-                    mostrarMensajeS(rpta.body().toString())
-                }
-            }
+        if(nombre.isEmpty() || correo.isEmpty() || password.isEmpty() || fechaNacimiento.isEmpty() || idOnline.isEmpty()){
+            Toast.makeText(this, "Complete el formulario", Toast.LENGTH_SHORT).show()
+        }else{
+            registrar(idOnline.trim(), password.trim(), nombre.trim(), correo.trim(), edad, genero, fechaNacimiento)
         }
+    }
 
+    private fun registrar(idOnline:String, userPassword:String, nombre:String, email:String, edad:Int, genero:String, fechaNacimiento: String){
+        auth.createUserWithEmailAndPassword(email, userPassword)
+            .addOnCompleteListener { task->
+                if(task.isSuccessful){
+                    val uid:String = auth.currentUser!!.uid
+                    reference = FirebaseDatabase.getInstance().reference.child("Usuarios").child(uid)
+
+                    val hashmap = HashMap<String, Any>()
+
+                    hashmap["uid"] = uid
+                    hashmap["idOnline"] = idOnline
+                    hashmap["nombre"] = nombre
+                    hashmap["email"] = email
+                    hashmap["edad"] = edad
+                    hashmap["genero"] = genero
+                    hashmap["fechaNacimiento"] = fechaNacimiento
+
+                    reference.updateChildren(hashmap).addOnCompleteListener {task2->
+                        if(task2.isSuccessful){
+                            Toast.makeText(this, "Usuario Registrado Correctamente", Toast.LENGTH_SHORT).show()
+                            finish()
+                            val intent = Intent(this, IngresarActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }.addOnFailureListener {e->
+                        Toast.makeText(this, "${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                }else{
+                    Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
+                }
+            }.addOnFailureListener {e->
+                Toast.makeText(this, "${e.message}", Toast.LENGTH_LONG).show()
+            }
     }
 
     private fun calcularEdad(fechaNacimiento: String): Int {
@@ -135,26 +157,6 @@ class RegistroActivity : AppCompatActivity() {
             edad--
         }
         return edad
-    }
-
-    private fun mostrarMensajeS(mensaje:String){
-        val ventana = AlertDialog.Builder(this)
-        ventana.setTitle("Información")
-        ventana.setMessage(mensaje)
-        ventana.setPositiveButton("Aceptar", DialogInterface.OnClickListener{dialog, which ->
-            val intent =Intent(this,IngresarActivity::class.java)
-            finish()
-            startActivity(intent)
-        })
-        ventana.create().show()
-    }
-
-    private fun mostrarMensaje(mensaje:String){
-        val ventana = AlertDialog.Builder(this)
-        ventana.setTitle("Información")
-        ventana.setMessage(mensaje)
-        ventana.setPositiveButton("Aceptar", null)
-        ventana.create().show()
     }
     override fun onPause() {
         super.onPause()

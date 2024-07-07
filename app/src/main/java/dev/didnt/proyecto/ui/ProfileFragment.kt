@@ -1,6 +1,5 @@
 package dev.didnt.proyecto.ui
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,13 +10,9 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import dev.didnt.proyecto.R
-import dev.didnt.proyecto.entidad.Usuario
-import dev.didnt.proyecto.servicio.RetrofitClient
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
 
@@ -33,38 +28,26 @@ class ProfileFragment : Fragment() {
     private lateinit var txtModifyEmail: EditText
     private lateinit var btnGuardar: Button
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        var userId = arguments?.getInt("id", 0)
-        var userIdOnline = arguments?.getString("userIdOnline")
-        var userPassword = arguments?.getString("userPassword")
-        val userName = arguments?.getString("userName")
-        var userEmail = arguments?.getString("userEmail")
-        var userEdad = arguments?.getInt("userEdad", 0)
-        var userGenero = arguments?.getString("userGenero")
-        val gender:String
-        if(userGenero=="M"){
-            gender = "Masculino"
-        }else{
-            gender = "Femenino"
-        }
-
+        val fbUser = FirebaseAuth.getInstance().currentUser
+        val usersRef = FirebaseDatabase.getInstance().getReference("Usuarios")
+        val currentUser = usersRef.child(fbUser!!.uid)
         lblUserName = view.findViewById(R.id.lblNombreUser)
         lblIdOnline = view.findViewById(R.id.lblIdOnline)
         lblUserEdad = view.findViewById(R.id.lblEdadUser)
         lblUserGenero = view.findViewById(R.id.lblGeneroUser)
         lblUserEmail = view.findViewById(R.id.lblCorreoUser)
 
-        lblUserName.text = userName
+        /*lblUserName.text = fbUser.uid
         lblIdOnline.text = "idOnline: "+userIdOnline
         lblUserEdad.text = "Edad: "+userEdad.toString()
         lblUserGenero.text = "Género: "+ gender
-        lblUserEmail.text = userEmail
+        lblUserEmail.text = userEmail*/
 
         editForm = view.findViewById(R.id.editForm)
         btnGuardar = view.findViewById(R.id.btnGuardar)
@@ -75,22 +58,24 @@ class ProfileFragment : Fragment() {
         btnEdit.setOnClickListener{
             editForm.visibility = View.VISIBLE
 
-            txtModifyName.setText(userName)
-            txtModifyEmail.setText(userEmail)
+            /*txtModifyName.setText(userName)
+            txtModifyEmail.setText(userEmail)*/
         }
         btnGuardar.setOnClickListener {
             editForm.visibility = View.GONE
-            actualizar(userId)
+            /*actualizar(userId)*/
         }
 
         return view
     }
+
+
     private fun actualizar(id:Int?){
 
         val nombre = txtModifyName.text.toString().trim()
         val email = txtModifyEmail.text.toString().trim()
 
-        val user = Usuario(0, "", "", nombre, email, 0, "")
+        /*val user = Usuario(0, "", "", nombre, email, 0, "")
 
         CoroutineScope(Dispatchers.IO).launch {
             val rpta = id?.let { RetrofitClient.webService.modificarUsuario(it, user) }
@@ -101,6 +86,6 @@ class ProfileFragment : Fragment() {
                         }
                     }
             }
-        }
+        }*/
     }
 }
