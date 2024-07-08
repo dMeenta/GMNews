@@ -5,10 +5,7 @@ import dev.didnt.proyecto.entidad.Usuario
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.PATCH
-import retrofit2.http.Path
 
 object AppConstantes{
     const val BASE_URL = "http://:3001" //Añadir ip
