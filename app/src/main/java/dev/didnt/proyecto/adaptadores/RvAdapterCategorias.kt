@@ -1,5 +1,6 @@
 package dev.didnt.proyecto.adaptadores
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import dev.didnt.proyecto.GameActivity
 import dev.didnt.proyecto.R
 import dev.didnt.proyecto.entidad.Juego
 
@@ -34,6 +36,17 @@ class RvAdapterCategorias: RecyclerView.Adapter<RvAdapterCategorias.MiViewHolder
     override fun onBindViewHolder(holder: MiViewHolder, position: Int) {
         val categoriaItem = listaJuegos[position]
         holder.setValoresJuego(categoriaItem)
+        holder.itemView.setOnClickListener{
+            val intent = Intent(holder.view.context, GameActivity::class.java)
+
+            intent.putExtra("id", categoriaItem.id)
+            intent.putExtra("nombre", categoriaItem.nombre)
+            intent.putExtra("descripcion", categoriaItem.descripcion)
+            intent.putExtra("imgUrl", categoriaItem.imgUrl)
+            intent.putExtra("fecha_lanzamiento", categoriaItem.fecha_lanzamiento)
+
+            holder.view.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
