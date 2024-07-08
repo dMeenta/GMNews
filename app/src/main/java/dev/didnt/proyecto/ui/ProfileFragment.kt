@@ -138,7 +138,7 @@ class ProfileFragment : Fragment() {
         return view
     }
     private fun actualizarUI(usuario: Usuario){
-        lblIdOnline.text = usuario.idOnline
+        lblIdOnline.text = "idOnline: "+usuario.idOnline
         lblUserName.text = usuario.nombre
     }
 }
