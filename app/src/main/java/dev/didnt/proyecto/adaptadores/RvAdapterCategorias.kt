@@ -22,8 +22,8 @@ class RvAdapterCategorias: RecyclerView.Adapter<RvAdapterCategorias.MiViewHolder
         private var imgCategory = view.findViewById<ImageView>(R.id.imgCategory)
 
         fun setValoresJuego(juego: Juego){
-            lblCategory.text = juego.Nombre
-            Glide.with(view.context).load(juego.Imagen).into(imgCategory)
+            lblCategory.text = juego.nombre
+            Glide.with(view.context).load(juego.imgUrl).into(imgCategory)
         }
     }
 

@@ -1,7 +1,6 @@
 package dev.didnt.proyecto.servicio
 
 import com.google.gson.GsonBuilder
-import dev.didnt.proyecto.entidad.Usuario
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
