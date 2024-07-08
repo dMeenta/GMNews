@@ -2,161 +2,158 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profileActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/profile_bg"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".ui.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/profile_bg">
-
-        <ImageView
-            android:id="@+id/imgProfile"
-            android:layout_width="135dp"
-            android:layout_height="135dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.507"
-            app:srcCompat="@drawable/profile" />
-
-        <TextView
-            android:id="@+id/lblNombreUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="48dp"
-            android:text="Nombre Usuario"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.276"
-            app:layout_constraintStart_toEndOf="@+id/imgProfile"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/lblEdadUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="44dp"
-            android:text="Edad: ---"
-            android:textColor="@color/white"
-            android:textSize="13dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imgProfile"
-            app:layout_constraintTop_toBottomOf="@+id/lblIdOnline"
-            app:layout_constraintVertical_bias="0.107" />
-
-        <TextView
-            android:id="@+id/lblIdOnline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="44dp"
-            android:text="idOnline: ---"
-            android:textColor="@color/white"
-            android:textSize="13dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imgProfile"
-            app:layout_constraintTop_toBottomOf="@+id/lblNombreUser"
-            app:layout_constraintVertical_bias="0.089" />
-
-        <TextView
-            android:id="@+id/lblGeneroUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="44dp"
-            android:text="Género: -"
-            android:textColor="@color/white"
-            android:textSize="13dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imgProfile"
-            app:layout_constraintTop_toBottomOf="@+id/lblEdadUser"
-            app:layout_constraintVertical_bias="0.172" />
+        android:layout_height="200dp">
 
         <ImageButton
             android:id="@+id/btnEdit"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/editar" />
 
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="135dp"
+            android:layout_height="135dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/profile" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/profile_info"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lblNombreUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre Usuario"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblIdOnline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="idOnline: ---"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/lblEdadUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Edad: ---"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/lblGeneroUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Género: ---"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
         <TextView
             android:id="@+id/lblCorreoUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:alpha="0.4"
-            android:text="TextView"
+            android:layout_marginTop="24dp"
+            android:text="Correo: ---"
             android:textColor="@color/white"
-            android:textSize="13dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/lblFechaUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Fecha de Nacimiento: ----------"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/editForm"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/lblEditar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="Editar Perfil"
-            android:textColor="@color/white"
-            android:textSize="24dp" />
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <EditText
-            android:id="@+id/txtModifyName"
+            android:id="@+id/txt_edit_idOnline"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:alpha="0.6"
+            android:layout_height="50dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/borde"
+            android:ems="10"
+            android:hint="idOnline..."
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/light_gray" />
+
+
+        <EditText
+            android:id="@+id/txt_edit_name"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="35dp"
             android:background="@drawable/borde"
             android:ems="10"
             android:hint="Nombre..."
             android:inputType="text"
             android:padding="10dp"
-            android:textColor="@color/white" />
-
-        <EditText
-            android:id="@+id/txtModifyEmail"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:alpha="0.6"
-            android:background="@drawable/borde"
-            android:ems="10"
-            android:hint="Correo..."
-            android:inputType="text"
-            android:padding="10dp"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textColorHint="@color/light_gray" />
 
         <Button
             android:id="@+id/btnGuardar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="35dp"
             android:backgroundTint="@color/white"
             android:text="Guardar Cambios"
             android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/btnCancelarEdit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="35dp"
+            android:backgroundTint="@color/white"
+            android:text="Cancelar"
+            android:textColor="@color/black" />
+
     </LinearLayout>
 
 </LinearLayout>
