@@ -19,8 +19,6 @@ interface WebService {
     suspend fun obtenerNoticias(): Response<NoticiaResponse>
     @GET("/games")
     suspend fun obtenerJuegos(): Response<JuegoResponse>
-    @PATCH("/usuarios/modificar/{id}")
-    suspend fun modificarUsuario(@Path("id") id: Int?, @Body usuario: Usuario):Response<String>
 }
 object RetrofitClient{
     val webService:WebService by lazy {
