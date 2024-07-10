@@ -1,5 +1,5 @@
-﻿# ProyectoAppMoviles
-Recuerden dejar aqui sus cambios para poder llevar un control de lo que hacemos
+﻿# GMNews
+Aplicación de noticias de videojuegos con mensajes en tiempo real.
 
 ### Luis:
 - Se añadio una screen que se encuentra en la main_activity
